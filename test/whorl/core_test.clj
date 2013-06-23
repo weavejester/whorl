@@ -1,7 +1,8 @@
 (ns whorl.core-test
-  (:require [clojure.test :refer :all]
-            [whorl.core :refer :all]))
+  (:use clojure.test
+        whorl.core))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest test-sorted
+  (let [x (sorted {:z '(2 1) :b 3 :a #{5 4} :c [7 6]})]
+    (is (= (pr-str x)
+           "{:a #{4 5}, :b 3, :c [7 6], :z (2 1)}"))))
