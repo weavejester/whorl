@@ -13,8 +13,18 @@
       :else    x))
    data))
 
-(defn fingerprint
+(defn- fingerprint* [data]
+  (digest/sha1 (pr-str (sorted data))))
+
+(defn- weak-hash-map []
+  (java.util.Collections/synchronizedMap (java.util.WeakHashMap.)))
+
+(def fingerprint
   "Return a unique ID for the data structure. Equivalent data structures will
   always produce the same ID."
-  [data]
-  (digest/sha1 (pr-str (sorted data))))
+  (let [cache (weak-hash-map)]
+    (fn [data]
+      (or (.get cache data)
+          (let [print (fingerprint* data)]
+            (.put cache data print)
+            print)))))
