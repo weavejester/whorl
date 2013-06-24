@@ -1,4 +1,4 @@
-(defproject whorl "0.1.0-SNAPSHOT"
+(defproject whorl "0.0.1"
   :description "Library for generating fingerprints of Clojure data"
   :url "https://github.com/weavejester/whorl"
   :license {:name "Eclipse Public License"
