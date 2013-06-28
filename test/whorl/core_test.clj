@@ -14,3 +14,9 @@
     #{3 2 1} #{1 3 2}
     [1 3 2] [1 3 2]
     {:x {:b 1 :a 2}} {:x {:a 2 :b 1}}))
+
+(deftest test-json-fingerprint
+  (are [x y] (= (fingerprint-json x) (fingerprint-json y))
+       '(1 2 3) [1 2 3]
+       :foo "foo"
+       {"foo" [1 2 3]} {:foo '(1 2 3)}))
